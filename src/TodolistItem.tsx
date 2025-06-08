@@ -6,10 +6,11 @@ type Props = {
     tasks: Task[];
     deleteTask: (task: Task["id"]) => void;
     changeFilter: (nextFilter: FilteredValues) => void;
+    addTask: (title: string) => void;
 };
 
 export type Task = {
-    id: number;
+    id: string;
     title: string;
     isDone: boolean;
 };
@@ -19,13 +20,19 @@ export const TodolistItem = ({
     tasks,
     deleteTask,
     changeFilter,
+    addTask,
 }: Props) => {
     return (
         <div>
             <h3>{title}</h3>
             <div>
                 <input />
-                <Button title={"+"} />
+                <Button
+                    title={"+"}
+                    onClickHandler={() => {
+                        addTask("New Task");
+                    }}
+                />
             </div>
             {tasks.length === 0 ? (
                 <p>Тасок нет</p>
